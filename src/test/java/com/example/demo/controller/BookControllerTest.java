@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Book;
+import com.example.demo.vo.Book;
 import com.example.demo.service.BookSearchService;
 import com.example.demo.service.SearchLogService;
 import org.junit.jupiter.api.Test;
@@ -50,7 +50,7 @@ public class BookControllerTest {
     given(this.bookSearchService.search(pageable, keyword)).willReturn(new PageImpl<>(Arrays.asList(book1, book2), pageable, 2));
 
     // when
-    ResultActions resultActions = this.mvc.perform(get("/search")
+    ResultActions resultActions = this.mvc.perform(get("/books/search")
         .param("page", String.valueOf(page))
         .param("size", String.valueOf(size))
         .param("keyword", keyword)
@@ -65,7 +65,6 @@ public class BookControllerTest {
       .andExpect(jsonPath("$.content[0].thumbnail").value(book1.getThumbnail()))
       .andExpect(jsonPath("$.content[0].description").value(book1.getDescription()))
       .andExpect(jsonPath("$.content[0].isbn").value(book1.getIsbn()))
-      .andExpect(jsonPath("$.content[0].author").value(book1.getAuthor()))
       .andExpect(jsonPath("$.content[0].publisher").value(book1.getPublisher()))
       .andExpect(jsonPath("$.content[0].publishedDate").value(book1.getPublishedDate()))
       .andExpect(jsonPath("$.content[0].price").value(book1.getPrice()))
@@ -79,7 +78,6 @@ public class BookControllerTest {
         .thumbnail("thumbnail" + index)
         .description("description" + index)
         .isbn("isbn" + index)
-        .author("author" + index)
         .publisher("publisher" + index)
         .publishedDate(new Date().getTime())
         .price(index * 10000l)
