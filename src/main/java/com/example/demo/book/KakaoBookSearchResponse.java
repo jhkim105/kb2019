@@ -1,4 +1,4 @@
-package com.example.demo.vo;
+package com.example.demo.book;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

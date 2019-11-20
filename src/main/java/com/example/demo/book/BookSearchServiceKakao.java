@@ -1,8 +1,6 @@
-package com.example.demo.service;
+package com.example.demo.book;
 
 import com.example.demo.config.KakaoProperties;
-import com.example.demo.vo.Book;
-import com.example.demo.vo.KakaoBookSearchResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

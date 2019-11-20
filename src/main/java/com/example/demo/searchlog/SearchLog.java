@@ -1,5 +1,6 @@
-package com.example.demo.model;
+package com.example.demo.searchlog;
 
+import com.example.demo.base.ColumnLength;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

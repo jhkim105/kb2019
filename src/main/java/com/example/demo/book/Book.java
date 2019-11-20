@@ -1,4 +1,4 @@
-package com.example.demo.vo;
+package com.example.demo.book;
 
 import lombok.AccessLevel;
 import lombok.Builder;

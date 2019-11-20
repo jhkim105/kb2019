@@ -1,8 +1,6 @@
-package com.example.demo.controller;
+package com.example.demo.book;
 
-import com.example.demo.vo.Book;
-import com.example.demo.service.BookSearchService;
-import com.example.demo.service.SearchLogService;
+import com.example.demo.searchlog.SearchLogService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -24,8 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(BookController.class)
-public class BookControllerTest {
+@WebMvcTest(BookSearchController.class)
+public class BookSearchControllerTest {
 
   @Autowired
   private MockMvc mvc;
@@ -40,20 +38,20 @@ public class BookControllerTest {
   @Test
   void search() throws Exception {
     // given
-    String keyword = "클린코드";
+    String query = "클린코드";
     int page = 0;
     int size = 5;
     Pageable pageable = PageRequest.of(page, size);
     int total = 2;
     Book book1 = newBook(1);
     Book book2 = newBook(2);
-    given(this.bookSearchService.search(pageable, keyword)).willReturn(new PageImpl<>(Arrays.asList(book1, book2), pageable, 2));
+    given(this.bookSearchService.search(pageable, query)).willReturn(new PageImpl<>(Arrays.asList(book1, book2), pageable, 2));
 
     // when
-    ResultActions resultActions = this.mvc.perform(get("/books/search")
+    ResultActions resultActions = this.mvc.perform(get("/book-search")
         .param("page", String.valueOf(page))
         .param("size", String.valueOf(size))
-        .param("keyword", keyword)
+        .param("query", query)
         .accept(MediaType.APPLICATION_JSON));
     resultActions.andDo(print());
 

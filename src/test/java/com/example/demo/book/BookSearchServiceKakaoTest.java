@@ -1,6 +1,7 @@
-package com.example.demo.service;
+package com.example.demo.book;
 
-import com.example.demo.vo.Book;
+import com.example.demo.book.BookSearchServiceKakao;
+import com.example.demo.book.Book;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

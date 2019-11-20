@@ -1,6 +1,5 @@
-package com.example.demo.service;
+package com.example.demo.book;
 
-import com.example.demo.vo.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
