@@ -10,12 +10,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.nio.charset.Charset;
 import java.util.Collections;
 
 @Service
@@ -28,7 +30,7 @@ public class BookSearchServiceKakao implements BookSearchService {
   @Override
   public Page<Book> search(Pageable pageable, String keyword) {
     HttpHeaders headers = new HttpHeaders();
-    headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+    headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON_UTF8));
     headers.add("Authorization", String.format("KakaoAK %s", kakaoProperties.getAppKey()));
 
     HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(headers);
@@ -38,11 +40,15 @@ public class BookSearchServiceKakao implements BookSearchService {
         .queryParam("size", pageable.getPageSize())
         .build(false);
     RestTemplate restTemplate = new RestTemplate();
+    restTemplate.getMessageConverters()
+        .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+
     log.debug(uriComponents.toUriString());
     ResponseEntity<KakaoBookSearchResponse> responseEntity =
         restTemplate.exchange(uriComponents.toUriString(), HttpMethod.GET, httpEntity, KakaoBookSearchResponse.class);
 
     KakaoBookSearchResponse kakaoBookSearchResponse = responseEntity.getBody();
+    log.debug("kakaoBookSearchResponse->{}", kakaoBookSearchResponse);
     return kakaoBookSearchResponse.toBookPage(pageable);
   }
 
