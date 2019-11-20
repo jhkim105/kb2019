@@ -19,6 +19,9 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+  activemq:
+    broker-url: vm://embedded?broker.persistent=false,useShutdownHook=false
+    in-memory: true
 
 kakao:
   appKey: c9f6f5f7a8870db204e7aca892b86c7c

@@ -1,6 +1,5 @@
 package com.example.demo.book;
 
-import com.example.demo.searchlog.SearchLogService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -32,7 +31,7 @@ public class BookSearchControllerTest {
   private BookSearchService bookSearchService;
 
   @MockBean
-  private SearchLogService searchLogService;
+  private SearchJmsSender searchJmsSender;
 
 
   @Test

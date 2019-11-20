@@ -1,49 +1,50 @@
 package com.example.demo.searchlog;
 
-import com.example.demo.base.ColumnLength;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-@Table(name = "tl_search_log")
+@Table(name = "tl_search_stats")
+@EqualsAndHashCode(callSuper = false, of = "id")
 @Getter
-@EqualsAndHashCode(callSuper = false, of = {"id"})
-@ToString()
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-public class SearchLog implements Serializable {
-
+public class SearchStats {
   @Id
-  @GeneratedValue
-  private Long id;
+  private String id;
 
-  @Column(name = "keyword", length = ColumnLength.KEYWORD)
-  private String keyword;
+  @ColumnDefault("1")
+  @Column(nullable = false)
+  private long count;
 
+  @Column(name = "created_date", updatable = false)
   @CreatedDate
-  @Column(name = "created_date")
-  private Long createdDate;
+  private Date createdDate;
 
-  @Column(name = "created_by", length = ColumnLength.ID)
-  private String createdBy;
+  @Column(name = "updated_date")
+  @LastModifiedDate
+  private Date updatedDate;
 
   @Builder
-  public SearchLog(String keyword) {
-    this.keyword = keyword;
+  public SearchStats(String id) {
+    this.id = id;
   }
 
+  public void addCount() {
+    this.count++;
+  }
 }
