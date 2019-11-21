@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 public class TokenAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
   @Override
-  @SuppressWarnings("PMD.UncommentedEmptyMethod")
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
    }
 

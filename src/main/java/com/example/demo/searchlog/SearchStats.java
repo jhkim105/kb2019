@@ -28,8 +28,8 @@ public class SearchStats {
   private String id;
 
   @ColumnDefault("1")
-  @Column(nullable = false)
-  private long count;
+  @Column(name = "search_count", nullable = false)
+  private Long searchCount;
 
   @Column(name = "created_date", updatable = false)
   @CreatedDate
@@ -45,6 +45,6 @@ public class SearchStats {
   }
 
   public void addCount() {
-    this.count++;
+    this.searchCount++;
   }
 }

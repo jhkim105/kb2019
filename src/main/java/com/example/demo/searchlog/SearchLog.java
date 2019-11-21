@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "tl_search_log")
@@ -36,10 +37,10 @@ public class SearchLog implements Serializable {
 
   @CreatedDate
   @Column(name = "created_date")
-  private Long createdDate;
+  private Date createdDate;
 
-  @Column(name = "created_by", length = ColumnLength.ID)
-  private String createdBy;
+  @Column(name = "created_by")
+  private Long createdBy;
 
   @Builder
   public SearchLog(String keyword) {

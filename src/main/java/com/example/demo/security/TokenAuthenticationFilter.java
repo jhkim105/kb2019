@@ -61,7 +61,6 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
 
   @Override
   public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-    log.debug("doFilter");
     HttpServletRequest request = (HttpServletRequest) req;
     HttpServletResponse response = (HttpServletResponse) res;
     String token = getToken(request);

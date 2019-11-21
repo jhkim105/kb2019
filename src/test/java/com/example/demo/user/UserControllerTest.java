@@ -1,5 +1,6 @@
 package com.example.demo.user;
 
+import com.example.demo.TestData;
 import com.example.demo.base.IntegrationTests;
 import com.example.demo.common.JsonUtils;
 import org.junit.jupiter.api.Test;
@@ -15,14 +16,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-class UserControllerIntegrationTest extends IntegrationTests{
+class UserControllerTest extends IntegrationTests{
 
   @Autowired
   private UserService userService;
 
 
   @Test
-  public void testJoin() throws Exception {
+  void testJoin() throws Exception {
     // when
     JoinRequest joinRequest = new JoinRequest();
     joinRequest.setUsername("newuser");
@@ -41,9 +42,9 @@ class UserControllerIntegrationTest extends IntegrationTests{
   }
 
   @Test
-  public void testLogin() throws Exception {
+  void testLogin() throws Exception {
     // when
-    LoginRequest loginRequest = new LoginRequest("user", "111111");
+    LoginRequest loginRequest = new LoginRequest(TestData.User.USERNAME, TestData.User.PASSWORD);
     ResultActions resultActions =
         mockMvc.perform(post("/users/login")
             .content(JsonUtils.toString(loginRequest))
@@ -57,9 +58,9 @@ class UserControllerIntegrationTest extends IntegrationTests{
   }
 
   @Test
-  public void testMe() throws Exception {
+  void testMe() throws Exception {
     // given
-    LoginRequest loginRequest = new LoginRequest("user", "111111");
+    LoginRequest loginRequest = new LoginRequest(TestData.User.USERNAME, TestData.User.PASSWORD);
     String authToken = userService.login(loginRequest).getAuthToken();
 
     // when

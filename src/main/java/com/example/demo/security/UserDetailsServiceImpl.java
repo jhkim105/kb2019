@@ -1,6 +1,5 @@
 package com.example.demo.security;
 
-
 import com.example.demo.user.User;
 import com.example.demo.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -13,9 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-  @Autowired
-  private UserRepository userRepository;
-
+  @Autowired private UserRepository userRepository;
 
   @Override
   @Transactional(readOnly = true)
