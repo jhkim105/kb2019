@@ -1,6 +1,6 @@
 package com.example.demo.book;
 
-import com.example.demo.base.JmsQueues;
+import com.example.demo.common.JmsQueues;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;

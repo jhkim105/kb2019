@@ -1,4 +1,4 @@
-package com.example.demo.base;
+package com.example.demo.common;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

@@ -1,5 +1,7 @@
 package com.example.demo.book;
 
+import com.example.demo.user.LoginRequest;
+import com.example.demo.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +26,20 @@ public class BookSearchIntegrationTest {
   @Autowired
   private WebApplicationContext ctx;
 
+  @Autowired
+  private UserService userService;
+
+  private String authToken;
+
   @BeforeEach
   public void setup() {
     this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx)
         .addFilters(new CharacterEncodingFilter("UTF-8", true))  // 필터 추가
         .alwaysDo(print())
         .build();
+
+    LoginRequest loginRequest = new LoginRequest("user", "111111");
+    authToken = userService.login(loginRequest).getAuthToken();
   }
 
   @Test
@@ -38,6 +48,7 @@ public class BookSearchIntegrationTest {
     // when
     String query = "미움받을 용기";
     ResultActions resultActions = this.mockMvc.perform(get("/book-search")
+        .header("Authorization", authToken)
         .param("page", "0")
         .param("size", "5")
         .param("query", query)

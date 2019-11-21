@@ -16,6 +16,7 @@ spring:
       password:
     sql-script-encoding: UTF-8
     initialization-mode: always
+    continue-on-error: true
   jpa:
     hibernate:
       ddl-auto: create

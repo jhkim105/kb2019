@@ -1,6 +1,6 @@
 package com.example.demo.searchlog;
 
-import com.example.demo.base.ColumnLength;
+import com.example.demo.common.ColumnLength;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

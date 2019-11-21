@@ -1,6 +1,9 @@
 package com.example.demo.user;
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Column;
@@ -20,14 +23,17 @@ import java.util.Set;
 @Table(name = "tu_user")
 @Getter
 @ToString(exclude = {"password"})
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
   @Id
   @GeneratedValue
   private Long id;
 
+  @Column(length = 50, unique = true)
   private String username;
 
+  @Column(length = 200)
   private String password;
 
   @ElementCollection(targetClass = Role.class)
@@ -36,4 +42,10 @@ public class User {
   @Enumerated(EnumType.STRING)
   private Set<Role> roles = new HashSet<>();
 
+  @Builder
+  public User(String username, String password, Role role) {
+    this.username = username;
+    this.password = password;
+    this.roles.add(role);
+  }
 }
