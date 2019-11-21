@@ -2,6 +2,8 @@ package com.example.demo.user;
 
 import com.example.demo.security.AuthUser;
 import com.example.demo.security.SecurityUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
+@Api
 public class UserController {
 
   private final UserService userService;
@@ -28,6 +31,7 @@ public class UserController {
   }
 
   @GetMapping("/me")
+  @ApiImplicitParam(name = "Authorization", value = "authToken", required = true, dataType = "string", paramType = "header")
   public AuthUser me() {
     AuthUser authUser = SecurityUtils.getAuthUser();
     return authUser;

@@ -1,18 +1,13 @@
 package com.example.demo.book;
 
-import com.example.demo.base.AbstractControllerTests;
-import com.example.demo.security.AuthUser;
-import com.example.demo.security.JwtAuthenticationTokenService;
-import org.junit.jupiter.api.BeforeEach;
+import com.example.demo.base.ControllerTests;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.Arrays;
@@ -25,28 +20,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@WebMvcTest(controllers = BookSearchController.class, useDefaultFilters = false)
-//@Disabled("NoSuchBeanDefinitionException")
-public class BookSearchControllerTest extends AbstractControllerTests {
-
-  @Autowired
-  private MockMvc mvc;
+public class BookSearchControllerTest extends ControllerTests {
 
   @MockBean
   private BookSearchService bookSearchService;
 
   @MockBean
   private SearchJmsSender searchJmsSender;
-
-  private String authToken;
-
-  @BeforeEach
-  void setup() {
-    JwtAuthenticationTokenService jwtAuthenticationTokenService = new JwtAuthenticationTokenService();
-    AuthUser authUser = AuthUser.builder().id(1L).username("user").authority("USER").build();
-    authToken = jwtAuthenticationTokenService.generateToken(authUser);
-  }
-
 
   @Test
   @WithMockUser(value = "user")

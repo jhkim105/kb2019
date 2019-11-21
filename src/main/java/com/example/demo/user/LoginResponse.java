@@ -14,11 +14,8 @@ public class LoginResponse {
 
   private String authToken;
 
-  private String refreshToken;
-
   @Builder
-  public LoginResponse(String authToken, String refreshToken) {
+  public LoginResponse(String authToken) {
     this.authToken = authToken;
-    this.refreshToken = refreshToken;
   }
 }

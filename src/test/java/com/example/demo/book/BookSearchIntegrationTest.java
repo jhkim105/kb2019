@@ -1,11 +1,11 @@
 package com.example.demo.book;
 
+import com.example.demo.base.IntegrationTests;
 import com.example.demo.user.LoginRequest;
 import com.example.demo.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -18,10 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-public class BookSearchIntegrationTest {
-
-  private MockMvc mockMvc;
+public class BookSearchIntegrationTest extends IntegrationTests {
 
   @Autowired
   private WebApplicationContext ctx;
@@ -31,10 +28,12 @@ public class BookSearchIntegrationTest {
 
   private String authToken;
 
+  private MockMvc myMockMvc;
+
   @BeforeEach
   public void setup() {
-    this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx)
-        .addFilters(new CharacterEncodingFilter("UTF-8", true))  // 필터 추가
+    this.myMockMvc = MockMvcBuilders.webAppContextSetup(ctx)
+        .addFilters(new CharacterEncodingFilter("UTF-8", true))
         .alwaysDo(print())
         .build();
 
@@ -47,7 +46,7 @@ public class BookSearchIntegrationTest {
 
     // when
     String query = "미움받을 용기";
-    ResultActions resultActions = this.mockMvc.perform(get("/book-search")
+    ResultActions resultActions = this.myMockMvc.perform(get("/book-search")
         .header("Authorization", authToken)
         .param("page", "0")
         .param("size", "5")
