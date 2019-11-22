@@ -17,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.cors.CorsUtils;
 
 @Configuration
 @WebMvcTestExclude
@@ -37,10 +38,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .formLogin().disable()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
         .authorizeRequests()
+          .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
           .antMatchers("/users/login", "/users/join").permitAll()
           .anyRequest().authenticated()
           .and()
-                .addFilterBefore(tokenAuthenticationFilter(), BasicAuthenticationFilter.class)
+        .addFilterBefore(tokenAuthenticationFilter(), BasicAuthenticationFilter.class)
         .authenticationProvider(tokenAuthenticationProvider())
         .exceptionHandling().authenticationEntryPoint(tokenAuthenticationEntryPoint()).and()
         .csrf().disable();

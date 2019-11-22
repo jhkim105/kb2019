@@ -1,5 +1,6 @@
 package com.example.demo.security;
 
+import com.example.demo.exception.ErrorCodes;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,10 +22,12 @@ public class TokenAuthenticationHandler {
   @Autowired
   private MappingJackson2HttpMessageConverter jacksonConverter;
 
+  // TODO: ErrorVO
   public void handleAccessDenied(HttpServletRequest request, HttpServletResponse response) {
     try {
       Map<String, Object> errorAttributes = new HashMap<>();
       errorAttributes.put("status", HttpStatus.UNAUTHORIZED.value());
+      errorAttributes.put("code", ErrorCodes.AUTHENTICATION_NEED.getCode());
       errorAttributes.put("message", "Unauthorized");
       response.setStatus(HttpStatus.UNAUTHORIZED.value());
       jacksonConverter.write(errorAttributes, MediaType.APPLICATION_JSON, new ServletServerHttpResponse(response));

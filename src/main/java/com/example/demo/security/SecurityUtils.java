@@ -1,5 +1,7 @@
 package com.example.demo.security;
 
+import com.example.demo.exception.BusinessException;
+import com.example.demo.exception.ErrorCodes;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -18,10 +20,10 @@ public class SecurityUtils {
     SecurityContext ctx = SecurityContextHolder.getContext();
     Authentication authentication = ctx.getAuthentication();
     if (authentication == null)
-      throw new AccessDeniedException("authentication not exists.");
+      throw new BusinessException(ErrorCodes.AUTHENTICATION_NEED, "authentication not exists.");
     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
     if (userDetails == null) {
-      throw new AccessDeniedException("userDetails not exists.");
+      throw new BusinessException(ErrorCodes.AUTHENTICATION_NEED, "userDetails not exists.");
     }
     return (AuthUser)userDetails;
   }
