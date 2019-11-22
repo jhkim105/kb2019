@@ -1,11 +1,10 @@
 package com.example.demo.user;
 
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor()
 @Getter
 public class JoinResponse {
   private Long id;

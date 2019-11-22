@@ -1,14 +1,15 @@
 package com.example.demo.user;
 
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 @Getter @ToString
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class LoginResponse {
+@NoArgsConstructor
+public class LoginResponse implements Serializable {
 
   private static final long serialVersionUID = 3417144000325211448L;
 
