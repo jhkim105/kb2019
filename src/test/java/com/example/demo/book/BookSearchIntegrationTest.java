@@ -7,11 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -21,22 +17,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class BookSearchIntegrationTest extends IntegrationTests {
 
   @Autowired
-  private WebApplicationContext ctx;
-
-  @Autowired
   private UserService userService;
 
   private String authToken;
 
-  private MockMvc myMockMvc;
-
   @BeforeEach
   public void setup() {
-    this.myMockMvc = MockMvcBuilders.webAppContextSetup(ctx)
-        .addFilters(new CharacterEncodingFilter("UTF-8", true))
-        .alwaysDo(print())
-        .build();
-
     LoginRequest loginRequest = new LoginRequest("user", "111111");
     authToken = userService.login(loginRequest).getAuthToken();
   }
@@ -46,7 +32,7 @@ public class BookSearchIntegrationTest extends IntegrationTests {
 
     // when
     String query = "미움받을 용기";
-    ResultActions resultActions = this.myMockMvc.perform(get("/book-search")
+    ResultActions resultActions = this.mockMvc.perform(get("/book-search")
         .header("Authorization", authToken)
         .param("page", "0")
         .param("size", "5")

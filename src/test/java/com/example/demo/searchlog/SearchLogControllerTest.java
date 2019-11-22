@@ -9,21 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Sql({"/search-log.sql", "/search-stats.sql"})
 class SearchLogControllerTest extends IntegrationTests {
 
   @Autowired
   private UserService userService;
 
   @Test
-  @Sql("/search-log.sql")
+  @Sql(scripts = "/search-log.sql",config = @SqlConfig(encoding = "UTF8"))
   void testMy() throws Exception {
     // given
     LoginRequest loginRequest = new LoginRequest(TestData.User.USERNAME, TestData.User.PASSWORD);
@@ -50,7 +50,8 @@ class SearchLogControllerTest extends IntegrationTests {
   }
 
   @Test
-  @Sql("/search-stats.sql")
+//  @Sql("/search-stats.sql")
+  @Sql(scripts = "/search-stats.sql", config = @SqlConfig(encoding = "UTF-8"))
   void testHotKeyword() throws Exception {
     // given
     LoginRequest loginRequest = new LoginRequest(TestData.User.USERNAME, TestData.User.PASSWORD);

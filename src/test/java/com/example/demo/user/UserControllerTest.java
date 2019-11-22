@@ -21,7 +21,6 @@ class UserControllerTest extends IntegrationTests{
   @Autowired
   private UserService userService;
 
-
   @Test
   void testJoin() throws Exception {
     // when
