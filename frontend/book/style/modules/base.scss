@@ -1,0 +1,11 @@
+$bg-color: #fff;
+$font-color: #000;
+$font-size: 16px;
+
+body {
+  line-height: 1.6;
+  font-family: 'Noto Sans KR', 'Noto Sans', 'Malgun Gothic', sans-serif;
+  font-size: $font-size;
+  color: $font-color;
+  background: $bg-color;
+}
