@@ -1,3 +1,4 @@
+// 레이아웃
 .layout-template {
   .ant-layout-header,
   .ant-layout-footer {
@@ -20,18 +21,29 @@
     }
   }
 
-  .ant-layout-content {
-    margin: 0 auto;
-    padding: 60px 0;
-    width: 960px;
-    min-height: calc(100vh - 120px);
-  }
-
   .ant-layout-footer {
     text-align: center;
   }
+
+  .ant-layout-content {
+    padding: 60px;
+    min-height: calc(100vh - 120px);
+  }
+
+  .container {
+    background: #fff;
+  }
+
+  .ant-layout-has-sider {
+    .ant-layout-content {
+      margin: 0 auto;
+    }
+  }
 }
 
+/********* 페이지별 *********/
+
+// 로그인
 #login {
   form {
     margin: 0 auto;
@@ -43,13 +55,15 @@
   }
 }
 
-#signup {
+// 가입
+#join {
   form {
     margin: 0 auto;
     max-width: 500px;
   }
 }
 
+// 검색
 #search {
   #search-input-wrap {
     margin-bottom: 30px;

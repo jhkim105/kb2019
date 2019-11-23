@@ -4,10 +4,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,10 +20,10 @@ public class BookSearchController {
 
   @GetMapping("/book-search")
   @ApiImplicitParam(name = "Authorization", value = "authToken", required = true, dataType = "string", paramType = "header")
-  public ResponseEntity<Page<Book>> search(@PageableDefault(page = 0, size = 10) Pageable pageable, String query) {
-    Page<Book> page = bookSearchService.search(pageable, query);
+  public ResponseEntity<Page<Book>> search(@RequestParam(required = false, defaultValue = "0") int page, int size,  String query) {
+    Page<Book> bookPage = bookSearchService.search(PageRequest.of(page, size), query);
     searchJmsSender.send(query);
-    return ResponseEntity.ok(page);
+    return ResponseEntity.ok(bookPage);
   }
 
 }

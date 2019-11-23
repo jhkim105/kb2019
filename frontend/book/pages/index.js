@@ -2,11 +2,11 @@ import LayoutTemplate from '../components/LayoutTemplate';
 import LoginFormContainer from '../containers/LoginFormContainer';
 
 const Index = (props) => {
-  console.log('index', props);
+  console.log('Index :', props);
 
   return (
     <LayoutTemplate name="login">
-      <LoginFormContainer />
+      <LoginFormContainer handleLogin={props.handleLogin} />
     </LayoutTemplate>
   );
 };

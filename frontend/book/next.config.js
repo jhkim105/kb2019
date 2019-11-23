@@ -5,5 +5,8 @@ const withCSS = require('@zeit/next-css');
 module.exports = withSass(
   withCSS({
     /* config options here */
+    webpack(config, options) {
+      return config;
+    },
   })
 );

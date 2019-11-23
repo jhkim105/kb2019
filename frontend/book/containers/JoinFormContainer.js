@@ -1,11 +1,10 @@
-import { Form, Input, Tooltip, Icon, Select, Button, AutoComplete } from 'antd';
-const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
+import { Form, Input, Button } from 'antd';
+import Router from 'next/router';
+import api from '../modules/api';
 
-class RegistrationForm extends React.Component {
+class JoinForm extends React.Component {
   state = {
     confirmDirty: false,
-    autoCompleteResult: [],
   };
 
   handleSubmit = (e) => {
@@ -13,6 +12,19 @@ class RegistrationForm extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+
+        api
+          .join(values)
+          .then((data) => {
+            console.log('response', data);
+            if (data.username) {
+              alert('가입되었습니다. 로그인 후 이용해주세요.');
+              Router.push('/');
+            }
+          })
+          .catch((error) => {
+            alert('API error:' + error);
+          });
       }
     });
   };
@@ -41,24 +53,17 @@ class RegistrationForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {
-        xs: { span: 24 },
         sm: { span: 8 },
       },
       wrapperCol: {
-        xs: { span: 24 },
         sm: { span: 16 },
       },
     };
     const tailFormItemLayout = {
       wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
         sm: {
           span: 16,
           offset: 8,
@@ -68,16 +73,15 @@ class RegistrationForm extends React.Component {
 
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-        <Form.Item label="E-mail">
-          {getFieldDecorator('email', {
+        <Form.Item label="Username">
+          {getFieldDecorator('username', {
             rules: [
               {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
+                message: 'The input is not valid username!',
               },
               {
                 required: true,
-                message: 'Please input your E-mail!',
+                message: 'Please input your username!',
               },
             ],
           })(<Input />)}
@@ -96,7 +100,7 @@ class RegistrationForm extends React.Component {
           })(<Input.Password />)}
         </Form.Item>
         <Form.Item label="Confirm Password" hasFeedback>
-          {getFieldDecorator('confirm', {
+          {getFieldDecorator('confirmPassword', {
             rules: [
               {
                 required: true,
@@ -118,4 +122,4 @@ class RegistrationForm extends React.Component {
   }
 }
 
-export default Form.create({ name: 'register' })(RegistrationForm);
+export default Form.create({ name: 'join' })(JoinForm);

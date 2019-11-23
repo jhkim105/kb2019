@@ -1,16 +1,20 @@
 import Link from 'next/link';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button } from 'antd';
 
 class LoginFormContainer extends React.Component {
   handleSubmit = (e) => {
-    e.preventDefault();
+    const { handleLogin } = this.props;
+
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        handleLogin(values);
       } else {
         console.log('Received values of form: ', err);
       }
     });
+
+    e.preventDefault();
   };
 
   render() {
@@ -38,13 +42,8 @@ class LoginFormContainer extends React.Component {
           <Button type="primary" htmlType="submit" className="login-form-button">
             로그인
           </Button>
-          <Link href="/signup">
+          <Link href="/join">
             <a title="회원가입">회원가입</a>
-          </Link>
-        </Form.Item>
-        <Form.Item>
-          <Link href="/search">
-            <a title="검색페이지">검색페이지</a>
           </Link>
         </Form.Item>
       </Form>
@@ -52,4 +51,4 @@ class LoginFormContainer extends React.Component {
   }
 }
 
-export default Form.create({ name: 'normal_login' })(LoginFormContainer);
+export default Form.create({ name: 'login' })(LoginFormContainer);
