@@ -41,6 +41,7 @@ public class BookSearchIntegrationTest extends IntegrationTests {
     resultActions.andDo(print());
 
     // then
+
     resultActions.andExpect(status().isOk())
         .andExpect(jsonPath("$.content").exists())
         .andExpect(jsonPath("$.totalElements").exists())

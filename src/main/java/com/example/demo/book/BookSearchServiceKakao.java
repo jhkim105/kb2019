@@ -30,7 +30,7 @@ public class BookSearchServiceKakao implements BookSearchService {
   @Override
   public Page<Book> search(Pageable pageable, String keyword) {
     HttpHeaders headers = new HttpHeaders();
-    headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON_UTF8));
+    headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
     headers.add("Authorization", String.format("KakaoAK %s", kakaoProperties.getAppKey()));
 
     HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(headers);

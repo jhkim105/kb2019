@@ -25,10 +25,8 @@ Authorization: {{authToken}}
 Content-Type: application/json
 
 ### /book-search
-OPTIONS http://localhost:8080/book-search
+GET http://localhost:8080/book-search?query=Clean
+Authorization: {{authToken}}
 Content-Type: application/json
-Orgin: http://test.com
-Access-Control-Request-Headers: authorization
-Access-Control-Request-Method: GET
 
 ###
