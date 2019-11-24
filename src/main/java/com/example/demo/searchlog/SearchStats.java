@@ -27,9 +27,9 @@ public class SearchStats {
   @Id
   private String id;
 
-  @ColumnDefault("1")
+  @ColumnDefault("0")
   @Column(name = "search_count", nullable = false)
-  private Long searchCount;
+  private long searchCount;
 
   @Column(name = "created_date", updatable = false)
   @CreatedDate

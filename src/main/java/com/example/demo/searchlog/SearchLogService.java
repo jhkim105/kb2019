@@ -21,13 +21,16 @@ public class SearchLogService {
   private final SearchStatsRepository searchStatsRepository;
 
   @Transactional
-  public void save(String keyword) {
-    saveSearchLog(keyword);
+  public void save(String keyword, Long searchedBy) {
+    saveSearchLog(keyword, searchedBy);
     saveSearchStats(keyword);
   }
 
-  private SearchLog saveSearchLog(String keyword) {
-    SearchLog searchLog = SearchLog.builder().keyword(keyword).build();
+  private SearchLog saveSearchLog(String keyword, Long searchedBy) {
+    SearchLog searchLog = SearchLog.builder()
+        .keyword(keyword)
+        .createdBy(searchedBy)
+        .build();
     return searchLogRepository.save(searchLog);
   }
 

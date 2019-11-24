@@ -1,9 +1,10 @@
 import LayoutTemplate from '../components/LayoutTemplate';
+import HotKeywordContainer from "../containers/HotKeywordContainer";
 
-const HotKeyword = () => {
+const HotKeyword = ({authToken}) => {
   return (
     <LayoutTemplate name="hot-keywords" sidebar>
-      인기 검색어 10
+      <HotKeywordContainer authToken={authToken}/>
     </LayoutTemplate>
   );
 };

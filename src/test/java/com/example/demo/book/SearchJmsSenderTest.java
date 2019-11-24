@@ -1,5 +1,7 @@
 package com.example.demo.book;
 
+import com.example.demo.TestData;
+import com.example.demo.common.SearchMessage;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +15,8 @@ class SearchJmsSenderTest {
 
   @Test
   public void send() {
-    searchJmsSender.send("테스트 주도 개발");
+    String keyword = "테스트";
+    searchJmsSender.send(SearchMessage.builder().keyword(keyword).searchedBy(TestData.User.ID).build());
   }
 
 }

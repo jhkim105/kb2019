@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class HotKeyword {
   private String keyword;
-  private long count;
+  private long searchCount;
 
   public static HotKeyword from(SearchStats searchStats) {
     return new HotKeyword(searchStats.getId(), searchStats.getSearchCount());

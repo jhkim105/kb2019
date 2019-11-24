@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 import util from './util';
+
 const API_SERVER = 'http://localhost:8080';
 let AUTH_TOKEN = null;
 
@@ -51,10 +52,39 @@ function searchBook(params) {
   }).then((res) => res.json());
 }
 
+function getMyKeywords(params){
+  console.log('api.getMyKeywords');
+  const queryString = util.queryString(params);
+  const URL = API_SERVER + '/search-logs/my?' + queryString;
+
+  return fetch(URL, {
+    method: 'GET',
+    headers: {
+      Authorization: AUTH_TOKEN,
+    },
+  }).then((res) => res.json());
+}
+
+function getHotKeywords(params){
+  console.log('api.getMyKeywords');
+  const queryString = util.queryString(params);
+  const URL = API_SERVER + '/search-logs/hot-keyword?' + queryString;
+
+  return fetch(URL, {
+    method: 'GET',
+    headers: {
+      Authorization: AUTH_TOKEN,
+    },
+  }).then((res) => res.json());
+}
+
+
 export default {
   join,
   login,
   logout,
   setAuthToken,
   searchBook,
+  getMyKeywords,
+  getHotKeywords
 };

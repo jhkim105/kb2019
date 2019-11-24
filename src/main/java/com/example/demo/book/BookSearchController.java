@@ -1,5 +1,7 @@
 package com.example.demo.book;
 
+import com.example.demo.common.SearchMessage;
+import com.example.demo.security.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +24,10 @@ public class BookSearchController {
   @ApiImplicitParam(name = "Authorization", value = "authToken", required = true, dataType = "string", paramType = "header")
   public ResponseEntity<Page<Book>> search(@RequestParam(required = false, defaultValue = "0") int page, int size,  String query) {
     Page<Book> bookPage = bookSearchService.search(PageRequest.of(page, size), query);
-    searchJmsSender.send(query);
+    searchJmsSender.send(SearchMessage.builder()
+        .keyword(query)
+        .searchedBy(SecurityUtils.getAuthUser().getId())
+        .build());
     return ResponseEntity.ok(bookPage);
   }
 

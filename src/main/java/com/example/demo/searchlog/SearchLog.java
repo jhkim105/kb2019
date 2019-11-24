@@ -40,11 +40,13 @@ public class SearchLog implements Serializable {
   private Date createdDate;
 
   @Column(name = "created_by")
+//  @CreatedBy
   private Long createdBy;
 
   @Builder
-  public SearchLog(String keyword) {
+  public SearchLog(String keyword, Long createdBy) {
     this.keyword = keyword;
+    this.createdBy = createdBy;
   }
 
 }

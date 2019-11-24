@@ -1,11 +1,13 @@
 package com.example.demo.book;
 
+import com.example.demo.TestData;
 import com.example.demo.base.IntegrationTests;
 import com.example.demo.user.LoginRequest;
 import com.example.demo.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -21,9 +23,12 @@ public class BookSearchIntegrationTest extends IntegrationTests {
 
   private String authToken;
 
+  @MockBean
+  SearchJmsSender searchJmsSender;
+
   @BeforeEach
   public void setup() {
-    LoginRequest loginRequest = new LoginRequest("user", "111111");
+    LoginRequest loginRequest = new LoginRequest(TestData.User.USERNAME, TestData.User.PASSWORD);
     authToken = userService.login(loginRequest).getAuthToken();
   }
 
@@ -41,7 +46,6 @@ public class BookSearchIntegrationTest extends IntegrationTests {
     resultActions.andDo(print());
 
     // then
-
     resultActions.andExpect(status().isOk())
         .andExpect(jsonPath("$.content").exists())
         .andExpect(jsonPath("$.totalElements").exists())
@@ -53,5 +57,9 @@ public class BookSearchIntegrationTest extends IntegrationTests {
         .andExpect(jsonPath("$.content[0].publishedDate").exists())
         .andExpect(jsonPath("$.content[0].price").exists())
         .andExpect(jsonPath("$.content[0].salePrice").exists());
+
   }
+
+
+
 }

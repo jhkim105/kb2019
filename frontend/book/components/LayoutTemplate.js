@@ -1,8 +1,9 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { Layout, Menu } from 'antd';
-const { Header, Footer, Content, Sider } = Layout;
+import {Layout, Menu} from 'antd';
 import './LayoutTemplate.scss';
+
+const { Header, Footer, Content, Sider } = Layout;
 
 const LayoutTemplate = ({ children, name = '', sidebar }) => {
   return (
@@ -17,7 +18,7 @@ const LayoutTemplate = ({ children, name = '', sidebar }) => {
         <Layout>
           <Header>
             <Link href="/">
-              <a>📚 Book</a>
+              <a>Book</a>
             </Link>
             <span>보고싶은 책을 검색해보세요</span>
           </Header>

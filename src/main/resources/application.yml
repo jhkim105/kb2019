@@ -1,9 +1,11 @@
-# Logging
 logging:
   level:
     com.example.demo: trace
 
-# H2
+server:
+  error:
+    include-exception: true
+    include-stacktrace: on_trace_param
 spring:
   h2:
     console:
@@ -23,6 +25,8 @@ spring:
   activemq:
     broker-url: vm://embedded?broker.persistent=false,useShutdownHook=false
     in-memory: true
+    packages:
+      trust-all: true
 swagger:
   enabled: true
 

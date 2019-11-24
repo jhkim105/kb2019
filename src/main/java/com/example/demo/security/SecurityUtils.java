@@ -2,7 +2,6 @@ package com.example.demo.security;
 
 import com.example.demo.exception.BusinessException;
 import com.example.demo.exception.ErrorCodes;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,7 +11,7 @@ public class SecurityUtils {
   private SecurityUtils() {
   }
 
-  public static String getCurrentUsername() {
+  public static String getAuthUsername() {
     return getAuthUser().getUsername();
   }
 
@@ -31,7 +30,7 @@ public class SecurityUtils {
   public static AuthUser getAuthUserSilently() {
     try {
       return getAuthUser();
-    } catch (AccessDeniedException ae) {
+    } catch (Exception ex) {
       // ignored
     }
     return null;
