@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
 @Service
@@ -41,7 +41,7 @@ public class BookSearchServiceKakao implements BookSearchService {
         .build(false);
     RestTemplate restTemplate = new RestTemplate();
     restTemplate.getMessageConverters()
-        .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+        .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
 
     log.debug(uriComponents.toUriString());
     ResponseEntity<KakaoBookSearchResponse> responseEntity =

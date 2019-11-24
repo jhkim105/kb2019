@@ -3,6 +3,7 @@ package com.example.demo.searchlog;
 import com.example.demo.security.AuthUser;
 import com.example.demo.security.SecurityUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class SearchLogService {
 
   private final SearchLogRepository searchLogRepository;
@@ -56,6 +58,7 @@ public class SearchLogService {
   }
 
   public Page<HotKeyword> getHotKeywordList() {
+    log.debug("getHotKeywordList() called.");
     List<SearchStats> searchStats = searchStatsRepository.findAllTop10ByOrderBySearchCountDesc();
     List<HotKeyword> hotKeywords = searchStats.stream().map(HotKeyword::from).collect(Collectors.toList());
     return new PageImpl<>(hotKeywords);
