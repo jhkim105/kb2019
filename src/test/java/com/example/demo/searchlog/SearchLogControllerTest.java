@@ -35,8 +35,8 @@ class SearchLogControllerTest extends IntegrationTests {
             get("/search-logs/my")
                 .header(HttpHeaders.AUTHORIZATION, authToken)
                 .contentType(MediaType.APPLICATION_JSON)
-                .param("pageNumber", "0")
-                .param("pageSize", "5")
+                .param("page", "0")
+                .param("size", "5")
             )
             .andDo(print());
 
@@ -50,7 +50,6 @@ class SearchLogControllerTest extends IntegrationTests {
   }
 
   @Test
-//  @Sql("/search-stats.sql")
   @Sql(scripts = "/search-stats.sql", config = @SqlConfig(encoding = "UTF-8"))
   void testHotKeyword() throws Exception {
     // given
@@ -70,7 +69,7 @@ class SearchLogControllerTest extends IntegrationTests {
     resultActions.andExpect(status().isOk())
         .andExpect(jsonPath("$.totalElements").value(3))
         .andExpect(jsonPath("$.content[0].keyword").value("클린코드"))
-        .andExpect(jsonPath("$.content[0].count").value(12912))
+        .andExpect(jsonPath("$.content[0].searchCount").value(12912))
 
     ;
   }

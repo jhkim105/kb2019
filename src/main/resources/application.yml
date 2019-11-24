@@ -27,6 +27,9 @@ spring:
     in-memory: true
     packages:
       trust-all: true
+  resources:
+    static-locations: file:/Users/jihwan/dev/kb2019/frontend/book/out
+
 swagger:
   enabled: true
 

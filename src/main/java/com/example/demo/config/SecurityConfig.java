@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     web.ignoring().antMatchers("/error", "/favicon.ico"
         , "/swagger-ui.html", "/swagger-ui.html/**", "/swagger-resources/**", "/v2/api-docs/**", "/webjars/**"
         , "/h2-console", "/h2-console/**"
+        , "/", "/index.html", "/_next/**"
     );
   }
 

@@ -32,3 +32,4 @@ build/
 /frontend/book/node_modules/
 /frontend/book/.next/
 /frontend/book/out/
+/frontend/book/node/
