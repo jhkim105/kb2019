@@ -4,6 +4,7 @@ import com.example.demo.security.AuthUser;
 import com.example.demo.security.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -57,6 +58,7 @@ public class SearchLogService {
     return new PageImpl<>(mySearchLogs, pageable, searchLogPage.getTotalElements());
   }
 
+  @Cacheable(value = "hotKeywordCache", key="#root.methodName")
   public Page<HotKeyword> getHotKeywordList() {
     log.debug("getHotKeywordList() called.");
     List<SearchStats> searchStats = searchStatsRepository.findAllTop10ByOrderBySearchCountDesc();
