@@ -75,8 +75,8 @@ public class BookSearchControllerTest extends ControllerTests {
         .isbn("isbn" + index)
         .publisher("publisher" + index)
         .publishedDate(new Date().getTime())
-        .price(index * 10000l)
-        .salePrice(index * 10000l - 1000l)
+        .price(index * 10000)
+        .salePrice(index * 10000 - 1000)
         .build();
   }
 }

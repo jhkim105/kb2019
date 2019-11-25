@@ -6,7 +6,8 @@
 * ActiveMQ - 검색어 카운트 저장
 * H2 - Memory DB
 * auth0 - JWT Token
-* Swagger - API Documentation/
+* Swagger - API Documentation
+* Hystrix - Kakao API FailOver To Naver API
 
 ### Frontend
 * Nextjs - React Framework

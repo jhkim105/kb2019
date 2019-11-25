@@ -34,7 +34,12 @@ swagger:
 
 jwt:
   secret: KB2019!@
+
 kakao:
   appKey: c9f6f5f7a8870db204e7aca892b86c7c
   apiUrl: https://dapi.kakao.com/v3/search/book
 
+naver:
+  clientId: JyLp8UQf3BwFuGIqAFPE
+  clientSecret: ZpYoyAfOWE
+  apiUrl: https://openapi.naver.com/v1/search/book.json

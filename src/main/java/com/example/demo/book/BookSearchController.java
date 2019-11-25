@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Api
 public class BookSearchController {
 
-  private final BookSearchService bookSearchService;
+  private final BookSearchService kakaoBookSearchService;
+  private final BookSearchService naverBookSearchService;
   private final SearchJmsSender searchJmsSender;
 
   @GetMapping("/book-search")
   @ApiImplicitParam(name = "Authorization", value = "authToken", required = true, dataType = "string", paramType = "header")
   public ResponseEntity<Page<Book>> search(@RequestParam(required = false, defaultValue = "0") int page, int size,  String query) {
-    Page<Book> bookPage = bookSearchService.search(PageRequest.of(page, size), query);
+    Page<Book> bookPage = kakaoBookSearchService.search(PageRequest.of(page, size), query);
     searchJmsSender.send(SearchMessage.builder()
         .keyword(query)
         .searchedBy(SecurityUtils.getAuthUser().getId())

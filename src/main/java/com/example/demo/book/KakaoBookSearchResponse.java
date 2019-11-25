@@ -44,9 +44,9 @@ public class KakaoBookSearchResponse {
     private String contents;
     private Date datetime;
     private String isbn;
-    private long price;
+    private Integer price;
     private String publisher;
-    @JsonProperty("sale_price") private long salePrice;
+    @JsonProperty("sale_price") private Integer salePrice;
     private String status;
     private String thumbnail;
     private String title;
@@ -55,7 +55,7 @@ public class KakaoBookSearchResponse {
 
     public Book toBook() {
       return Book.builder()
-          .authors(authors)
+          .author(String.join(",", authors))
           .description(contents)
           .publishedDate(datetime.getTime())
           .isbn(isbn)

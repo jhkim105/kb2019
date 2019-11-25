@@ -22,14 +22,20 @@ client.global.set("authToken", response.body.authToken);
 ### /users/login
 GET http://localhost:8080/users/me
 Authorization: {{authToken}}
-Content-Type: application/json
+Accept: application/json
 
 ### kakao
 GET https://dapi.kakao.com/v3/search/book?query=미움받을 용기&page=1&size=10
 Authorization: KakaoAK c9f6f5f7a8870db204e7aca892b86c7c
 
+### naver
+GET https://openapi.naver.com/v1/search/book.json?query=미움받을 용기&display=10&start=1
+X-Naver-Client-Id: JyLp8UQf3BwFuGIqAFPE
+X-Naver-Client-Secret: ZpYoyAfOWE
+
+
 ### /book-search
-GET http://localhost:8080/book-search?query=Clean
+GET http://localhost:8080/book-search?query=Clean&size=10
 Authorization: {{authToken}}
 Content-Type: application/json
 

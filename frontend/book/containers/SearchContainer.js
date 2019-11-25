@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Empty, Input, Table } from 'antd';
+import React, {Component} from 'react';
+import {Empty, Input, Table} from 'antd';
 import api from '../modules/api';
 
 const { Search } = Input;
@@ -10,7 +10,7 @@ const columns = [
   },
   {
     title: '저자',
-    dataIndex: 'authors',
+    dataIndex: 'author',
     width: 200,
   },
   {

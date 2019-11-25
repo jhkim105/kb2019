@@ -105,7 +105,11 @@
       <version>3.8.1</version>
     </dependency>
     <!--// cache -->
-
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+      <version>2.1.4.RELEASE</version>
+    </dependency>
 
   </dependencies>
   <build>
@@ -135,14 +139,12 @@
             <goals>
               <goal>install-node-and-npm</goal>
             </goals>
-<!--            <phase>process-test-resources</phase>-->
           </execution>
           <execution>
             <id>npm install</id>
             <goals>
               <goal>npm</goal>
             </goals>
-<!--            <phase>process-test-resources</phase>-->
           </execution>
           <execution>
             <id>npm build</id>
@@ -152,7 +154,6 @@
             <configuration>
               <arguments>run build</arguments>
             </configuration>
-<!--            <phase>process-test-resources</phase>-->
           </execution>
           <execution>
             <id>npm export</id>
@@ -162,7 +163,6 @@
             <configuration>
               <arguments>run export</arguments>
             </configuration>
-<!--            <phase>process-test-resources</phase>-->
           </execution>
         </executions>
       </plugin>
