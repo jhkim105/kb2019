@@ -16,7 +16,8 @@
  
 ## 실행방법(jar)
 ### 실행 파일 다운로드  
-[다운로드](https://github.com/jhkim105/kb2019/jar/demo.jar)
+[다운로드](https://github.com/jhkim105/kb2019/raw/master/jar/demo.jar)
+
 
 ### 실행하기
   
