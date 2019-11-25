@@ -26,11 +26,9 @@ spring:
     in-memory: true
     packages:
       trust-all: true
-  mvc:
-    log-resolved-exception: true
-#  resources:
-#    static-locations: file:/Users/jihwan/dev/kb2019/frontend/book/out
-
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
 swagger:
   enabled: true
 
@@ -39,3 +37,4 @@ jwt:
 kakao:
   appKey: c9f6f5f7a8870db204e7aca892b86c7c
   apiUrl: https://dapi.kakao.com/v3/search/book
+
