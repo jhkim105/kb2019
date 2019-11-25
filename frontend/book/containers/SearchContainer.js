@@ -72,11 +72,14 @@ class SearchContainer extends Component {
         .searchBook(params)
         .then((data) => {
           console.log('response', data);
+          console.log('data.totalElements', data.totalElements);
 
-          if (data.totalElements) {
+          if (data.totalElements > 0) {
             this.setData(data);
+          } else if (data.totalElements == 0) {
+            alert("검색결과가 없습니다.");
           } else {
-            alert(data);
+            alert(data)
           }
 
           this.handleLoading(false);
