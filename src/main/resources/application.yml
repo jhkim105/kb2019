@@ -1,11 +1,10 @@
 logging:
   level:
     com.example.demo: trace
-
 server:
   error:
-    include-exception: true
-    include-stacktrace: on_trace_param
+    include-exception: false
+    include-stacktrace: always
 spring:
   h2:
     console:
@@ -27,8 +26,10 @@ spring:
     in-memory: true
     packages:
       trust-all: true
-  resources:
-    static-locations: file:/Users/jihwan/dev/kb2019/frontend/book/out
+  mvc:
+    log-resolved-exception: true
+#  resources:
+#    static-locations: file:/Users/jihwan/dev/kb2019/frontend/book/out
 
 swagger:
   enabled: true
@@ -38,4 +39,3 @@ jwt:
 kakao:
   appKey: c9f6f5f7a8870db204e7aca892b86c7c
   apiUrl: https://dapi.kakao.com/v3/search/book
-
