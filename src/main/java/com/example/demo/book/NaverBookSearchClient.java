@@ -3,6 +3,7 @@ package com.example.demo.book;
 import com.example.demo.config.NaverProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
@@ -24,6 +25,7 @@ public class NaverBookSearchClient implements BookSearchClient {
   @Autowired
   private NaverProperties naverProperties;
 
+  @Cacheable(value = "naverSearch")
   public Page<Book> search(Pageable pageable, String keyword) {
     HttpHeaders headers = new HttpHeaders();
     headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));

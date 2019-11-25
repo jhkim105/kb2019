@@ -1,5 +1,6 @@
 package com.example.demo.searchlog;
 
+import com.example.demo.base.AbstractEntity;
 import com.example.demo.common.ColumnLength;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -16,7 +17,6 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -26,7 +26,9 @@ import java.util.Date;
 @ToString()
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-public class SearchLog implements Serializable {
+public class SearchLog extends AbstractEntity<Long> {
+
+  private static final long serialVersionUID = 4576947996013305555L;
 
   @Id
   @GeneratedValue

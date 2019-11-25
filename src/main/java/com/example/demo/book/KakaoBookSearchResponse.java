@@ -1,5 +1,6 @@
 package com.example.demo.book;
 
+import com.example.demo.base.AbstractDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,9 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @ToString
-public class KakaoBookSearchResponse {
+public class KakaoBookSearchResponse extends AbstractDto {
+
+  private static final long serialVersionUID = -4324888396694256365L;
 
   private Meta meta;
 
@@ -30,7 +33,10 @@ public class KakaoBookSearchResponse {
   @Getter
   @Setter
   @ToString
-  public static class Meta {
+  public static class Meta extends AbstractDto {
+
+    private static final long serialVersionUID = 7728831875979727466L;
+
     @JsonProperty("total_count") private int totalCount;
     @JsonProperty("pageable_count") private int pageableCount;
     @JsonProperty("is_end") private boolean end;
@@ -39,7 +45,10 @@ public class KakaoBookSearchResponse {
   @Getter
   @Setter
   @ToString
-  public static class Document {
+  public static class Document extends AbstractDto {
+
+    private static final long serialVersionUID = -7380433801331752877L;
+
     private List<String> authors;
     private String contents;
     private Date datetime;

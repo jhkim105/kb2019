@@ -6,8 +6,9 @@
 * ActiveMQ - 검색어 카운트 저장
 * H2 - Memory DB
 * auth0 - JWT Token
-* Swagger - API Documentation
 * Hystrix - Kakao API FailOver To Naver API
+* Ehcache3
+* Swagger - API Documentation
 
 ### Frontend
 * Nextjs - React Framework
@@ -42,3 +43,8 @@ java -jar target/demo-0.0.1-SNAPSHOT.jar
 * App: [http://localhost:8080/](http://localhost:8080/)
 * Swagger: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 * h2-console:[http://localhost:8080/h2-console](http://localhost:8080/h2-console) (JDBC URL:jdbc:h2:mem:demo)
+
+## 참고사항
+* Cache 적용한 부분 - 도서 검색, 인기키워드
+* 인키 키워드에 Cache(5초)를 적용해서, 카운트 숫자가 안맞는 것처럼 보일 수 있음.(5초 뒤에는 제대로 보임)
+ 

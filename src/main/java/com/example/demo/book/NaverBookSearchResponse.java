@@ -1,5 +1,6 @@
 package com.example.demo.book;
 
+import com.example.demo.base.AbstractDto;
 import com.example.demo.common.DateUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,10 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @ToString
-public class NaverBookSearchResponse {
+public class NaverBookSearchResponse extends AbstractDto {
+
+  private static final long serialVersionUID = -1809250903100306917L;
+
   private int total;
   private int start;
   private int display;
@@ -30,7 +34,8 @@ public class NaverBookSearchResponse {
   @Getter
   @Setter
   @ToString
-  public static class Item {
+  public static class Item extends AbstractDto {
+    private static final long serialVersionUID = -1582659137990908906L;
     private String title;
     private String link;
     private String image;

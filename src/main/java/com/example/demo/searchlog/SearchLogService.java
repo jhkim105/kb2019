@@ -65,4 +65,5 @@ public class SearchLogService {
     List<HotKeyword> hotKeywords = searchStats.stream().map(HotKeyword::from).collect(Collectors.toList());
     return new PageImpl<>(hotKeywords);
   }
+
 }

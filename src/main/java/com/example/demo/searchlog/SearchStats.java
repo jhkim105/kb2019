@@ -1,10 +1,12 @@
 package com.example.demo.searchlog;
 
+import com.example.demo.base.AbstractEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -21,9 +23,13 @@ import java.util.Date;
 @Table(name = "tl_search_stats")
 @EqualsAndHashCode(callSuper = false, of = "id")
 @Getter
+@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-public class SearchStats {
+public class SearchStats extends AbstractEntity<String> {
+
+  private static final long serialVersionUID = 6602872994569237240L;
+
   @Id
   private String id;
 

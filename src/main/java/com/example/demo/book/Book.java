@@ -1,5 +1,6 @@
 package com.example.demo.book;
 
+import com.example.demo.base.AbstractDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +10,8 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class Book {
+public class Book extends AbstractDto {
+  private static final long serialVersionUID = 5317417411589393830L;
   private String title;
   private String thumbnail;
   private String description;
