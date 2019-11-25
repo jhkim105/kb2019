@@ -48,7 +48,7 @@ class MyKeywordContainer extends Component{
           if (data.totalElements) {
             this.setData(data);
           } else {
-            alert(data.status);
+            alert(data);
           }
 
           this.handleLoading(false);

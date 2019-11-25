@@ -1,11 +1,14 @@
 package com.example.demo.user;
 
+import com.example.demo.exception.BusinessException;
+import com.example.demo.exception.ErrorCodes;
 import com.example.demo.security.AuthUser;
 import com.example.demo.security.JwtAuthenticationTokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +25,12 @@ public class UserService {
   @Transactional(readOnly = true)
   public LoginResponse login(LoginRequest loginRequest) {
     UsernamePasswordAuthenticationToken token = loginRequest.toUsernamePasswordAuthenticationToken();
-    Authentication authentication = authenticationManager.authenticate(token);
+    Authentication authentication;
+    try {
+      authentication = authenticationManager.authenticate(token);
+    } catch(AuthenticationException ex) {
+      throw new BusinessException(ErrorCodes.AUTHENTICATION_FAIL);
+    }
     AuthUser authUser = (AuthUser) authentication.getPrincipal();
 
     String authToken = jwtAuthenticationTokenService.generateToken(authUser);

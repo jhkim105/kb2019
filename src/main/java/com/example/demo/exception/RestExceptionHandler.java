@@ -38,7 +38,7 @@ public class RestExceptionHandler {
     request.setAttribute("javax.servlet.error.status_code", status.value(), WebRequest.SCOPE_REQUEST);
     Map<String, Object> errorAttributeMap = errorAttributes.getErrorAttributes(request, false);
     errorAttributeMap.put("code", errorCodes.getCode());
-    errorAttributeMap.put("message", message);
+    errorAttributeMap.put("message", errorCodes.getMessage());
     if (StringUtils.equals("always", stacktrace))
       errorAttributes.getError(request).printStackTrace();
     return new ResponseEntity<>(errorAttributeMap, new HttpHeaders(), status);

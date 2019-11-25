@@ -37,7 +37,7 @@ class MyApp extends App {
       if (data.authToken) {
         this.onLogin(data.authToken);
       } else {
-        alert(data.status);
+        alert(data);
       }
     });
   };

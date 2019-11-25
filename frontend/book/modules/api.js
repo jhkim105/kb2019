@@ -27,7 +27,13 @@ function login(params) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(params),
-  }).then((res) => res.json());
+  }).then((res) => {
+    if (res.status >= 400) {
+      return "아이디 또는 패스워드가 틀렸습니다.";
+    } else {
+      return res.json();
+    }
+  });
 }
 
 function logout() {
@@ -49,7 +55,13 @@ function searchBook(params) {
     headers: {
       Authorization: AUTH_TOKEN,
     },
-  }).then((res) => res.json());
+  }).then((res) => {
+    if (res.status >= 400) {
+      return "오류가 발생했습니다.";
+    } else {
+      return res.json();
+    }
+  });
 }
 
 function getMyKeywords(params){
@@ -62,7 +74,13 @@ function getMyKeywords(params){
     headers: {
       Authorization: AUTH_TOKEN,
     },
-  }).then((res) => res.json());
+  }).then((res) => {
+    if (res.status >= 400) {
+      return "오류가 발생했습니다.";
+    } else {
+      return res.json();
+    }
+  });
 }
 
 function getHotKeywords(params){
@@ -75,7 +93,13 @@ function getHotKeywords(params){
     headers: {
       Authorization: AUTH_TOKEN,
     },
-  }).then((res) => res.json());
+  }).then((res) => {
+    if (res.status >= 400) {
+      return "오류가 발생했습니다.";
+    } else {
+      return res.json();
+    }
+  });
 }
 
 
