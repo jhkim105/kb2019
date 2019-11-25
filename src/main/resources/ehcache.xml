@@ -5,9 +5,6 @@
             http://www.ehcache.org/v3
             http://www.ehcache.org/schema/ehcache-core-3.8.xsd">
 
-  <!-- Persistent cache directory -->
-  <persistence directory="spring-boot-ehcache/cache"/>
-
   <!-- Default cache template -->
   <cache-template name="default">
     <expiry>
@@ -27,8 +24,7 @@
 
     <resources>
       <heap>1000</heap>
-      <offheap unit="MB">10</offheap>
-      <disk persistent="true" unit="MB">20</disk>
+      <offheap unit="MB">100</offheap>
     </resources>
   </cache-template>
 
