@@ -1,39 +1,58 @@
 import React, {Component} from 'react';
 import {Empty, Input, Table} from 'antd';
 import api from '../modules/api';
+import BookDetailModal from '../components/BookDetailModal';
 
 const { Search } = Input;
-const columns = [
-  {
-    title: '책이름',
-    dataIndex: 'title',
-  },
-  {
-    title: '저자',
-    dataIndex: 'author',
-    width: 200,
-  },
-  {
-    title: '출판사',
-    dataIndex: 'publisher',
-    width: 200,
-  },
-  {
-    title: '가격',
-    dataIndex: 'price',
-    width: 150,
-  },
-];
 
 class SearchContainer extends Component {
-  state = {
-    keyword: null,
-    content: [],
-    loading: false,
-    pagination: { pageSize: 20 },
-  };
+  constructor(props){
+    super(props);
 
-  setData = ({ content, number, size, totalElements }) => {
+    this.columns = [
+      {
+        title: '책이름',
+        dataIndex: 'title',
+        render: (text, record, index) => (
+            <a
+                onClick={() => {
+                  console.log('onClick', index, this.state.content[index]);
+                  const detailData = this.state.content[index];
+                  this.showModal(detailData);
+                }}
+            >
+              {text}
+            </a>
+        ),
+      },
+      {
+        title: '저자',
+        dataIndex: 'author',
+        width: 200,
+      },
+      {
+        title: '출판사',
+        dataIndex: 'publisher',
+        width: 200,
+      },
+      {
+        title: '가격',
+        dataIndex: 'price',
+        width: 150,
+      },
+    ];
+
+    this.state = {
+      keyword: null,
+      content: [],
+      loading: false,
+      pagination: {pageSize: 20},
+      modalVisibility: false,
+      modalData: null,
+    };
+  }
+
+  setData = ({content, number, size, totalElements}) => {
     console.log('setData :', content, number, size, totalElements);
 
     this.setState({
@@ -50,22 +69,22 @@ class SearchContainer extends Component {
     this.handleLoading(true);
 
     api
-      .searchBook(params)
-      .then((data) => {
-        console.log('response', data);
+        .searchBook(params)
+        .then((data) => {
+          console.log('response', data);
 
-        if (data.totalElements) {
-          this.setData(data);
-        } else {
-          alert(data.status);
-        }
+          if (data.totalElements) {
+            this.setData(data);
+          } else {
+            alert(data.status);
+          }
 
-        this.handleLoading(false);
-      })
-      .catch((error) => {
-        alert('API error:' + error);
-        this.handleLoading(false);
-      });
+          this.handleLoading(false);
+        })
+        .catch((error) => {
+          alert('API error:' + error);
+          this.handleLoading(false);
+        });
   };
 
   handleLoading = (state) => {
@@ -91,7 +110,7 @@ class SearchContainer extends Component {
   };
 
   handleTableChange = (pagination) => {
-    const pager = { ...this.state.pagination };
+    const pager = {...this.state.pagination};
     pager.current = pagination.current;
 
     this.setState({
@@ -105,29 +124,45 @@ class SearchContainer extends Component {
     });
   };
 
-  render() {
-    const { handleSearch, handleTableChange } = this;
-    const { content, loading, pagination } = this.state;
+  showModal = (data) => {
+    this.setState({
+      modalVisibility: true,
+      modalData: data,
+    });
+  };
+
+  hideModal = () => {
+    this.setState({
+      modalVisibility: false,
+      modalData: null,
+    });
+  };
+
+  render(){
+    const {columns, handleSearch, handleTableChange, hideModal} = this;
+    const {content, loading, pagination, modalVisibility, modalData} = this.state;
 
     return (
-      <React.Fragment>
-        <section id="search-input-wrap">
-          <Search placeholder="도서 검색" enterButton="검색" size="large" onSearch={handleSearch} />
-        </section>
-        <section id="search-result-wrap">
-          {content.length ? (
-            <Table
-              columns={columns}
-              dataSource={content}
-              pagination={pagination}
-              loading={loading}
-              onChange={handleTableChange}
-            />
-          ) : (
-            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="검색어를 입력해보세요" />
-          )}
-        </section>
-      </React.Fragment>
+        <React.Fragment>
+          <section id="search-input-wrap">
+            <Search placeholder="도서 검색" enterButton="검색" size="large" onSearch={handleSearch}/>
+          </section>
+          <section id="search-result-wrap">
+            {content.length ? (
+                <Table
+                    columns={columns}
+                    dataSource={content}
+                    pagination={pagination}
+                    loading={loading}
+                    onChange={handleTableChange}
+                />
+            ) : (
+                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="검색어를 입력해보세요"/>
+            )}
+          </section>
+
+          <BookDetailModal visible={modalVisibility} data={modalData} handleConfirm={hideModal}/>
+        </React.Fragment>
     );
   }
 }

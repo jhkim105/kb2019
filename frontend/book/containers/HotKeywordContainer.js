@@ -6,11 +6,11 @@ const {Search} = Button;
 
 const columns = [
   {
-    keyword: '키워드',
+    title: '키워드',
     dataIndex: 'keyword'
   },
   {
-    keyword: '검색횟수',
+    title: '검색횟수',
     dataIndex: 'searchCount'
   }
 ];
