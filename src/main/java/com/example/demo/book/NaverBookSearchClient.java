@@ -22,8 +22,12 @@ import java.util.Collections;
 @Service
 @Slf4j
 public class NaverBookSearchClient implements BookSearchClient {
+
   @Autowired
   private NaverProperties naverProperties;
+
+  @Autowired
+  private RestTemplate restTemplate;
 
   @Cacheable(value = "naverSearch")
   public Page<Book> search(Pageable pageable, String keyword) {
@@ -38,9 +42,6 @@ public class NaverBookSearchClient implements BookSearchClient {
         .queryParam("start", pageable.getPageNumber() + 1)
         .queryParam("display", pageable.getPageSize())
         .build(false);
-    RestTemplate restTemplate = new RestTemplate();
-//    restTemplate.getMessageConverters()
-//        .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
 
     log.debug(uriComponents.toUriString());
     ResponseEntity<NaverBookSearchResponse> responseEntity =

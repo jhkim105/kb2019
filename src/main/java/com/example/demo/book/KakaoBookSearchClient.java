@@ -28,6 +28,9 @@ public class KakaoBookSearchClient implements BookSearchClient {
   @Autowired
   private KakaoProperties kakaoProperties;
 
+  @Autowired
+  private RestTemplate restTemplate;
+
   @Override
   @Cacheable(value = "kakaoSearch")
   public Page<Book> search(Pageable pageable, String keyword) {
@@ -41,7 +44,7 @@ public class KakaoBookSearchClient implements BookSearchClient {
         .queryParam("page", pageable.getPageNumber() + 1)
         .queryParam("size", pageable.getPageSize())
         .build(false);
-    RestTemplate restTemplate = new RestTemplate();
+
     restTemplate.getMessageConverters()
         .add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
 
